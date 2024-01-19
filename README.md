@@ -27,5 +27,3 @@ Feel free to explore the projects and dive into the code. Each project directory
 ## Feedback and Contributions
 
 I welcome feedback, suggestions, and contributions from the community. If you find something interesting or have ideas for improvement, please don't hesitate to open an issue or submit a pull request.
-
-Happy exploring and learning!

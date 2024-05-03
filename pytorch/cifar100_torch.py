@@ -4,29 +4,29 @@ import torch
 import torch.nn as nn
 import torchvision
 from torchvision import transforms
-import torch.nn.functional as F
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 # Loading and processing the dataset
 
 transform = transforms.Compose([
     transforms.Resize(size=(32, 32)),
-    transforms.Grayscale(1),
     transforms.ToTensor(),
-    transforms.Normalize(0.5, 0.5) # Mean and standard deviation used in the proessing of image net
+    transforms.Normalize(
+       (0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010) # Mean and standard deviation used in the proessing of image net
+    )
 ])
 
-trainset = torchvision.datasets.CIFAR10(
+trainset = torchvision.datasets.CIFAR100(
     root = "./data",
     train = True,
-    download = False,
+    download = True,
     transform = transform,
     target_transform = None
 )
 testset = torchvision.datasets.CIFAR10(
     root = './data',
     train = False,
-    download = False,
+    download = True,
     transform = transform,
     target_transform = None
 )
@@ -46,25 +46,53 @@ testloader = torch.utils.data.DataLoader(
 class cifar10Model(nn.Module):
     def __init__(self):
         super().__init__()
-        self.conv1 = nn.Conv2d(1, 12, kernel_size=(3, 3), padding=0, stride=1)
-        self.pool1 = nn.AvgPool2d(kernel_size=(2, 2))
+        self.conv1 = nn.Conv2d(3, 32, kernel_size=(3, 3), stride=1, padding=1)
+        self.act1 = nn.ReLU()
+        self.drop1 = nn.Dropout(0.2)
+
+        self.conv2 = nn.Conv2d(32, 32, kernel_size=(2, 2), stride=1, padding=1)
+        self.act2 = nn.ReLU()
+        self.pool2 = nn.MaxPool2d(kernel_size=(2, 2))
+
+        self.conv3 = nn.Conv2d(32, 16, kernel_size=(1, 1), stride=1, padding=1)
+        self.act3 = nn.ReLU()
+        #self.batch1 = nn.BatchNorm2d()
+        self.pool3 = nn.MaxPool2d(kernel_size=(2, 2))
+
         self.flat = nn.Flatten()
-        self.dense1 = nn.Linear(2700, 512)
-        self.drop1 = nn.Dropout(p=0.2)
-        self.dense2 = nn.Linear(512, 64)
-        self.dense3 = nn.Linear(64, 10)
-    def forward (self, x):
-        x = self.pool1(self.conv1(x))
-        x = F.relu(x)
-        x = self.flat(x)
-        x = F.relu(self.dense1(x))
+
+        self.fc3 = nn.Linear(1296, 512)
+        self.act4 = nn.ReLU()
+        self.drop3 = nn.Dropout(0.2)
+
+        self.fc4 = nn.Linear(512, 100)
+
+    def forward(self, x):
+
+        # input 3x32x32 | output 32x32x32
+        x = self.act1(self.conv1(x))
         x = self.drop1(x)
-        x = F.relu(self.dense2(x))
-        # x = F.log_softmax(self.dense3(x))
-        x = self.dense3(x)
+        # input 32x32x32 | output 32x33x33
+        x = self.act2(self.conv2(x))
+        # input 32x33x33 | output 32x32x32
+        x = self.pool2(x)
+        # input 32x32x32 | output 16x34x34
+        x = self.act3(self.conv3(x))
+        #x = self.batch1(x)
+        # input 16x34x34 | output 16x33x33
+        x = self.pool3(x)
+        # input 16x33x33 | output 17424
+        x = self.flat(x)
+        # input 17424 | output 512
+        x = self.act4(self.fc3(x))
+        x = self.drop3(x)
+        # input 512 | outpupt 10
+        x = self.fc4(x)
+        
+
         return x
 
-model = cifar10Model().to(device)
+model = cifar10Model()
 loss_fn = nn.CrossEntropyLoss()
 opt = torch.optim.SGD(params = model.parameters(), lr=0.01, momentum=0.9)
 

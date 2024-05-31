@@ -53,7 +53,6 @@ Make sure you have the following libraries installed:
 You can install the required libraries using pip:
 
 bash
-
 `pip install torch tensorflow numpy matplotlib`
 
 Usage
@@ -62,17 +61,11 @@ Usage
 Each script is standalone and can be run individually. For example, to run the PyTorch autoencoder implementation:
 
 bash
-
-Copy code
-
 `python autoencoder_torch.py`
 
 Or to run the TensorFlow cats vs. dogs classifier:
 
 bash
-
-Copy code
-
 `python cats_tf.py`
 
 Contributing

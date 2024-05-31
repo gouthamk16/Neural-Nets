@@ -56,7 +56,7 @@ You can install the required libraries using pip:
 pip install torch tensorflow numpy matplotlib
 ```
 
-##Usage
+## Usage
 -----
 
 Each script is standalone and can be run individually. For example, to run the PyTorch autoencoder implementation:
@@ -71,17 +71,17 @@ Or to run the TensorFlow cats vs. dogs classifier:
 python cats_tf.py
 ```
 
-##Contributing
+## Contributing
 ------------
 
 Contributions are welcome! If you have any improvements or additional implementations, feel free to open a pull request. Please make sure to follow the existing code style and include appropriate comments and documentation.
 
-##License
+## License
 -------
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
+This project is unlicensed.
 
-##Acknowledgements
+## Acknowledgements
 ----------------
 
 Thanks to the contributors and the open-source community for their invaluable support and contributions.

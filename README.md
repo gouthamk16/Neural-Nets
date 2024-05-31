@@ -2,15 +2,15 @@
 
 Welcome to the Neural Network Implementations repository. This repository contains various implementations of common neural network architectures using both PyTorch and TensorFlow frameworks. Each implementation is organized into a separate file for ease of use and understanding.
 
-## Repository Structure
+### Repository Structure
 .
-├── Autoencoder
-├── Image Classification using ConvNets
-├── GAN 
-├── K-Folds Autotuning
-├── Transfer Learning 
-├── More on CNN's 
-└── Object Detection (YOLO)
+── Autoencoder
+── Image Classification using ConvNets
+── GAN 
+── K-Folds Autotuning
+── Transfer Learning 
+── More on CNN's 
+── Object Detection (YOLO)
 
  ### Directories and Files
 

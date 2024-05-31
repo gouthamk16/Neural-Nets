@@ -1,8 +1,8 @@
-`# Neural Network Implementations in PyTorch and TensorFlow
+# Neural Network Implementations in PyTorch and TensorFlow
 
 Welcome to the Neural Network Implementations repository. This repository contains various implementations of common neural network architectures using both PyTorch and TensorFlow frameworks. Each implementation is organized into a separate file for ease of use and understanding.
 
-## Repository Structure`
+## Repository Structure
 .
 ├── Autoencoder
 ├── Image Classification using ConvNets
@@ -12,7 +12,7 @@ Welcome to the Neural Network Implementations repository. This repository contai
 ├── More on CNN's 
 └── Object Detection (YOLO)
 
- `### Directories and Files
+ ### Directories and Files
 
 - `going_modular/`: This directory is reserved for future modular code development.
 - `LOADING_DATA.py`: A script for loading datasets used across different implementations.

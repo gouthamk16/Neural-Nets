@@ -1,1 +1,1 @@
-https://www.kaggle.com/datasets/gunavenkatdoddi/eye-diseases-classification
+Implementation of common neural networks using PyTorch and TensorFlow
